@@ -14,6 +14,8 @@ API TradeAgent.mobi
     - [Удаление не актуальных товаров](#goods-remove)
 - [Публикация категорий (типов) цен](#price-levels)
     - [Удаление не актуальных категорий (типов) цен](#clear-price-levels)
+- [Публикация единиц измерения](#units)
+    - [Удаление не актуальных единиц измерения](#clear-units)
 - [Публикация пользователей учетной системы](#users)
     - [Удаление не актуальных пользователей учетной системы](#users-remove)
 - [Публикация юридических лиц учетной системы](#companies)
@@ -302,11 +304,14 @@ DELETE-запрос по адресу **https://tradeagent.mobi/api/v1/groups** 
 Пример публикации товаров:
 
     $ curl -XPOST -H 'Content-Type: application/json' 'https://tradeagent.mobi/api/v1/goods?key=YOUR_API_KEY' -d '[
-    {"id": "15418", "groupId": "15416", "taxRate": 1.0, "packageSize": 0.0, "name": "Помада", "basePriceTax": 0.57, "basePrice": 0.57, "packing": 1000.0, "weight": 1.0, "pieceWeight": false, "rest": 240.0, "discountGroupId": 0, "sortBy": 2116, "currencyId": 2, "prices": [
-            {"priceLevelId": 1, "price": 0.45, "priceTax": 0.45},
-            {"priceLevelId": 2, "price": 0.51, "priceTax": 0.51}
-        ]}
-    ]'
+          {"id": "15418", "groupId": "15416", "taxRate": 1.0, "packageSize": 0.0, "name": "Помада", "basePriceTax": 0.57, "basePrice": 0.57, "packing": 1000.0, "weight": 1.0, "pieceWeight": false, "rest": 240.0, "discountGroupId": 0, "sortBy": 2116, "currencyId": 2, "prices": [
+              {"priceLevelId": 1, "price": 0.45, "priceTax": 0.45},
+              {"priceLevelId": 2, "price": 0.51, "priceTax": 0.51}
+          ], "unit": "3", "units": [
+              {"id": "1", "mult": 10.0},
+              {"id": "2", "mult": 100.0}
+          ]}
+      ]'
 
 Формат данных:
 
@@ -379,6 +384,18 @@ DELETE-запрос по адресу **https://tradeagent.mobi/api/v1/groups** 
     <td>int</td>
     <td>нет</td>
     <td>Множитель набираемого количества.</td>
+</tr>
+<tr>
+    <td>unit</td>
+    <td>string</td>
+    <td>нет</td>
+    <td>Код базовой единицы измерения.</td>
+</tr>
+<tr>
+    <td>units</td>
+    <td>array</td>
+    <td>нет</td>
+    <td>Список дополнительных единиц измерения и их коэффициенты по отношению к базовой.</td>
 </tr>
 <tr>
     <td>sortBy</td>
@@ -517,6 +534,61 @@ DELETE-запрос по адресу *https://tradeagent.mobi/api/v1/price_leve
 Пример удаления всех категорий цен опубликованных раньше чем 24 часа назад:
 
     $ curl -XDELETE -H 'Content-Type: application/json' 'https://tradeagent.mobi/api/v1/price_levels?key=YOUR_API_KEY' -d '{"hours": 24}'
+
+
+
+
+# <a name="price-levels"></a> Публикация единиц измерения
+
+Для публикации единиц измерения используется POST-запрос по адресу **https://tradeagent.mobi/api/v1/units?key=YOUR_API_KEY**.
+
+Пример публикации единиц измерения:
+
+    $ curl -XPOST -H 'Content-Type: application/json' 'https://tradeagent.mobi/api/v1/units?key=YOUR_API_KEY' -d '[
+        {"id": "1", "shortName": "шт.", "name": "Штука"},
+        {"id": "2", "shortName": "ящ.", "name": "Ящик"}
+    ]'
+
+Формат данных:
+
+<table>
+<thead>
+<tr>
+    <td>Поле</td>
+    <td>Тип</td>
+    <td>Обязательное</td>
+    <td>Описание</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>id</td>
+    <td>string</td>
+    <td>да</td>
+    <td>Код единицы измерения</td>
+</tr>
+<tr>
+    <td>name</td>
+    <td>string</td>
+    <td>да</td>
+    <td>Имя единицы измерения</td>
+</tr>
+<tr>
+    <td>shortName</td>
+    <td>string</td>
+    <td>да</td>
+    <td>Короткое имя единицы измерения</td>
+</tr>
+</tbody>
+</table>
+
+## <a name="clear-units"></a> Удаление не актуальных единиц измерения
+
+DELETE-запрос по адресу *https://tradeagent.mobi/api/v1/units* удаляет все единицы измерения старше *hours* часов.
+
+Пример удаления всех единиц измерения опубликованных раньше чем 24 часа назад:
+
+    $ curl -XDELETE -H 'Content-Type: application/json' 'https://tradeagent.mobi/api/v1/units?key=YOUR_API_KEY' -d '{"hours": 24}'
 
 
 # <a name="users"></a> Публикация пользователей учетной системы
