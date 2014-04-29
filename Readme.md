@@ -110,7 +110,7 @@ API TradeAgent.mobi
     <td>backlog</td>
     <td>double</td>
     <td>нет</td>
-    <td>общая задолженность.</td>
+    <td>общая задолженность</td>
 </tr>
 <tr>
     <td>sortBy</td>
@@ -380,22 +380,16 @@ DELETE-запрос по адресу **https://tradeagent.mobi/api/v1/groups** 
     <td>Признак &quot;весовой товар&quot; (true), иначе штучный (false)</td>
 </tr>
 <tr>
-    <td>mult</td>
-    <td>int</td>
-    <td>нет</td>
-    <td>Множитель набираемого количества.</td>
-</tr>
-<tr>
     <td>unit</td>
     <td>string</td>
     <td>нет</td>
-    <td>Код базовой единицы измерения.</td>
+    <td>Код базовой единицы измерения</td>
 </tr>
 <tr>
     <td>units</td>
     <td>array</td>
     <td>нет</td>
-    <td>Список дополнительных единиц измерения и их коэффициенты по отношению к базовой.</td>
+    <td>Список дополнительных единиц измерения и их коэффициенты по отношению к базовой</td>
 </tr>
 <tr>
     <td>sortBy</td>
@@ -413,7 +407,7 @@ DELETE-запрос по адресу **https://tradeagent.mobi/api/v1/groups** 
     <td>taxRate</td>
     <td>double</td>
     <td>нет</td>
-    <td>Коэффициент НДС (1.0 или 1.2)</td>
+    <td>Коэффициент НДС (без - 1.0, 10% - 1.1, 20% - 1.2 и т.д.)</td>
 </tr>
 <tr>
     <td>currencyId</td>
@@ -424,6 +418,32 @@ DELETE-запрос по адресу **https://tradeagent.mobi/api/v1/groups** 
 </tbody>
 </table>
 
+Формат единиц измерения:
+
+<table>
+<thead>
+<tr>
+    <td>Поле</td>
+    <td>Тип</td>
+    <td>Обязательное</td>
+    <td>Описание</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>id</td>
+    <td>string</td>
+    <td>да</td>
+    <td>Код единицы измерения</td>
+</tr>
+<tr>
+    <td>mult</td>
+    <td>double</td>
+    <td>да</td>
+    <td>Коэффициент относительно базовой единицы измерения</td>
+</tr>
+</tbody>
+</table>
 
 ## <a name="prices"></a> Формат цен
 
@@ -538,7 +558,7 @@ DELETE-запрос по адресу *https://tradeagent.mobi/api/v1/price_leve
 
 
 
-# <a name="price-levels"></a> Публикация единиц измерения
+# <a name="units"></a> Публикация единиц измерения
 
 Для публикации единиц измерения используется POST-запрос по адресу **https://tradeagent.mobi/api/v1/units?key=YOUR_API_KEY**.
 
