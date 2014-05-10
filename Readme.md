@@ -814,7 +814,7 @@ DELETE-запрос по адресу *https://tradeagent.mobi/api/v1/companies*
     <td>Примечание к документу</td>
 </tr>
 <tr>
-    <td>shipdate</td>
+    <td>shipDate</td>
     <td>date</td>
     <td>Дата доставки</td>
 </tr>
