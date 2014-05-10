@@ -96,9 +96,9 @@ API TradeAgent.mobi
 </tr>
 <tr>
     <td>priceLevelId</td>
-    <td>int</td>
+    <td>string</td>
     <td>нет</td>
-    <td>Уровень (категория) цен. 0 - не используется</td>
+    <td>Уровень (категория) цен</td>
 </tr>
 <tr>
     <td>regid</td>
@@ -304,9 +304,9 @@ DELETE-запрос по адресу **https://tradeagent.mobi/api/v1/groups** 
 Пример публикации товаров:
 
     $ curl -XPOST -H 'Content-Type: application/json' 'https://tradeagent.mobi/api/v1/goods?key=YOUR_API_KEY' -d '[
-          {"id": "15418", "groupId": "15416", "taxRate": 1.0, "packageSize": 0.0, "name": "Помада", "basePriceTax": 0.57, "basePrice": 0.57, "packing": 1000.0, "weight": 1.0, "pieceWeight": false, "rest": 240.0, "discountGroupId": 0, "sortBy": 2116, "currencyId": 2, "prices": [
-              {"priceLevelId": 1, "price": 0.45, "priceTax": 0.45},
-              {"priceLevelId": 2, "price": 0.51, "priceTax": 0.51}
+          {"id": "15418", "groupId": "15416", "taxRate": 1.0, "packageSize": 0.0, "name": "Помада", "basePriceTax": 0.57, "basePrice": 0.57, "packing": 1000.0, "weight": 1.0, "pieceWeight": false, "rest": 240.0, "discountGroupId": 0, "sortBy": 2116, "currencyId": "2", "prices": [
+              {"priceLevelId": "1", "price": 0.45, "priceTax": 0.45},
+              {"priceLevelId": "2", "price": 0.51, "priceTax": 0.51}
           ], "unit": "3", "units": [
               {"id": "1", "mult": 10.0},
               {"id": "2", "mult": 100.0}
@@ -411,7 +411,7 @@ DELETE-запрос по адресу **https://tradeagent.mobi/api/v1/groups** 
 </tr>
 <tr>
     <td>currencyId</td>
-    <td>int</td>
+    <td>string</td>
     <td>нет</td>
     <td>Код валюты цен товаров</td>
 </tr>
@@ -463,9 +463,9 @@ DELETE-запрос по адресу **https://tradeagent.mobi/api/v1/groups** 
 <tbody>
 <tr>
     <td>priceLevelId</td>
-    <td>int</td>
+    <td>string</td>
     <td>нет</td>
-    <td>Код уровня (категории) цены. Если не используется - пропустить поле или оставить 0</td>
+    <td>Код уровня (категории) цены. Если не используется - пропустить поле</td>
 </tr>
 <tr>
     <td>price</td>
@@ -702,7 +702,7 @@ DELETE-запрос по адресу *https://tradeagent.mobi/api/v1/users* у�
 </table>
 
 
-## <a name="users-remove"></a> Удаление не актуальных пользователей учетной системы
+## <a name="companies-remove"></a> Удаление не актуальных пользователей учетной системы
 
 DELETE-запрос по адресу *https://tradeagent.mobi/api/v1/companies* удаляет всех юридических лиц системы старше **hours** часов.
 
@@ -727,7 +727,7 @@ DELETE-запрос по адресу *https://tradeagent.mobi/api/v1/companies*
     {"documents": [
         {"docType": 0, "id": "534efe81-4a33-45e2-a7a6-1bae58040624", "stats": {"accessCounts": 0, "creatingTime": "24.03.2014 12:35", "accessTime": "24.03.2014 12:35"}, "customerId": "150", "deliveryAddressId": "728", "goods": [
             {"id": "27522", "amount": 1.0, "price": 38.0, "sum": 38.0, "sumTax": 38.0}
-        ], "companyId": "1", "priceLevelId": 0, "sum": 38.0, "sumTax": 38.0, "discountSum": 0.0, "shipDate": "", "currencyId": 980, "currencyRate": 1.0, "note": "", "accUserId": "u1"}
+        ], "companyId": "1", "priceLevelId": "1", "sum": 38.0, "sumTax": 38.0, "discountSum": 0.0, "shipDate": "", "currencyId": "980", "currencyRate": 1.0, "note": "", "accUserId": "u1"}
     ], "message": {"info": "Успешно", "isError": false}}
 
 
@@ -776,7 +776,12 @@ DELETE-запрос по адресу *https://tradeagent.mobi/api/v1/companies*
 <tr>
     <td>sum</td>
     <td>double</td>
-    <td>Общая сумма документа</td>
+    <td>Общая сумма документа без НДС</td>
+</tr>
+<tr>
+    <td>sumTax</td>
+    <td>double</td>
+    <td>Общая сумма документа с НДС</td>
 </tr>
 <tr>
     <td>discountSum</td>
@@ -790,12 +795,12 @@ DELETE-запрос по адресу *https://tradeagent.mobi/api/v1/companies*
 </tr>
 <tr>
     <td>priceLevelId</td>
-    <td>int</td>
+    <td>string</td>
     <td>Код категории цен</td>
 </tr>
 <tr>
     <td>currencyId</td>
-    <td>int</td>
+    <td>string</td>
     <td>Код валюты цен в документе</td>
 </tr>
 <tr>
@@ -859,7 +864,7 @@ DELETE-запрос по адресу *https://tradeagent.mobi/api/v1/companies*
 </tr>
 <tr>
     <td>priceLevelId</td>
-    <td>int</td>
+    <td>string</td>
     <td>Код категории цен</td>
 </tr>
 <tr>
@@ -971,7 +976,7 @@ DELETE-запрос по адресу *https://tradeagent.mobi/api/v1/companies*
 </tr>
 <tr>
     <td>currencyId</td>
-    <td>int</td>
+    <td>string</td>
     <td>Код валюты цен в документе</td>
 </tr>
 <tr>
@@ -1007,7 +1012,7 @@ DELETE-запрос по адресу *https://tradeagent.mobi/api/v1/companies*
 
 Формат полей документа возврат аналогичен формату полей [Заявка](#order).
 
-### <a name="status"></a> Изменение статусов документов в системе [TradeAgent.mobi](https://tradeagent.mobi)
+### <a name="statuses"></a> Изменение статусов документов в системе [TradeAgent.mobi](https://tradeagent.mobi)
 
 
 Для изменения статусов документов в системе используется POST-запрос по адресу **https://tradeagent.mobi/api/v1/docs/statuses?key=YOUR_API_KEY**.
